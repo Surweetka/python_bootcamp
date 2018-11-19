@@ -2,8 +2,10 @@ from zad1_obiek import Produkt
 
 
 class Basket():
-    def __init__(self):
-        pass
+    def __init__(self, koszyk):
+        self.koszyk = koszyk
+        koszyk = list()
+
 
     def add_product(self, product, qty):
         pass
