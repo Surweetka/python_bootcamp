@@ -1,6 +1,7 @@
 from random import randint
 from przedmiot import Przedmiot
 
+
 class Postac():
     def __init__(self, imie, atak, zdrowie):
         self.imie = imie
@@ -9,26 +10,32 @@ class Postac():
         self.max_zdrowie = zdrowie
         self.ekwipunek = []
 
-    def przedstaw_sie(self):
-        print(f"Mam na imię {self.imie}, mam {self.atak} ataku i {self.zdrowie}/{self.max_zdrowie} HP.")
+    # def przedstaw_sie(self):
+    #     print(self)
+
+    def atak(self):
+        wynik = self.atak
+        for p in self.ekwipunek:
+            wynik += p.bonus_atk
+        return wynik
 
     def __str__(self):
         if self.czy_zyje():
-
-            return f"Mam na imię {self.imie}, mam {self.atak} ataku i {self.zdrowie} HP.\n"
+            napis = "EKWPIUNEK:\n"
+            for x in self.ekwipunek:
+                napis += str(x) + "\n"
+            return f"Jestem {self.imie}, mam {self.atak} ataku i {self.zdrowie}/{self.max_zdrowie} życia.\n" + napis
         else:
-            return f"{self.imie} nie zyje."
+            return f"Jestem {self.imie}, miałem {self.atak} i nie żyję."
 
-    def obrazenia(self):
-        ile = randint(10, 40)
+    def obrazenia(self, ile):
         print(f"{self.imie} oberwał za {ile} obrażeń.")
         self.zdrowie = self.zdrowie - ile
-        print(f"Zdrowie {self.imie} {self.zdrowie}/{self.max_zdrowie}")
+        if self.zdrowie < 0:
+            self.zdrowie = 0
 
     def czy_zyje(self):
         return self.zdrowie > 0
-
-
 
     def heal(self):
         if self.zdrowie > 0:
@@ -49,7 +56,13 @@ class Postac():
         return wynik
 
     def daj_przedmiot(self):
-        pass
+        self.ekwipunek.append(przedmiot)
+
+    def atak_plus(self):
+        wynik = self.atak
+        for p in self.ekwipunek:
+            wynik += p.bonus_atk
+        return wynik
 
     @staticmethod
     def walka(atakujacy, broniacy):
@@ -69,14 +82,14 @@ class Postac():
 tomasz = Postac("Tomasz", 35, 100)
 stanley = Postac("Stanley", 25, 200)
 
-# tulipan = Przedmiot("Zielony tulipan zniszczenia", 5)
-# tomasz.daj_przedmiot(tulipan)
+tulipan = Przedmiot("Zielony tulipan zniszczenia", 5)
+tomasz.daj_przedmiot(tulipan)
 
 Postac.walka(tomasz, stanley)
 print(tomasz)
 print(stanley)
 
-
+print(f"bonus atk: {tomasz.atak_plus()}")
 
 # print(tomasz)
 # print()
@@ -89,7 +102,6 @@ print(stanley)
 # tomasz.obrazenia()
 # print()
 # print(tomasz)
-
 
 
 # def test_nowa_postac():

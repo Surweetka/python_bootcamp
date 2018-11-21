@@ -1,7 +1,7 @@
-class Przedmiot():
-    def __init__(self, nazwa, bonusy_do_ataku):
+class Przedmiot:
+    def __init__(self, nazwa, bonus_do_ataku):
         self.nazwa = nazwa
-        self.bonusy_atk = bonusy_do_ataku
+        self.bonus_atk = bonus_do_ataku
 
     def __str__(self):
-        return f"{self.nazwa}, {self.bonusy_atk} do ataku"
+        return f"{self.nazwa}, {self.bonus_atk} do ataku"
