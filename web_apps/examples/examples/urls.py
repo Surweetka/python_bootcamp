@@ -25,5 +25,6 @@ urlpatterns = [
     path('hello/', hello),
     path('hello/<imie>', hello),
     path('', hello),
+    path('math', obliczenia),
     path('math/<operation>/<a>/<b>', obliczenia)
 ]
